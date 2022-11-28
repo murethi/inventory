@@ -38,3 +38,5 @@ The application will run on ````http://localhost:8080 ```` and database on
 
 Each service has a readme file in its directory for instructions on how to 
 access different endpoints
+
+**I have included a postman collection within the root**

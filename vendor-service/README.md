@@ -1,7 +1,7 @@
 # Suppliers (Vendor Service)
 ## Module notes
 The vendor service contains supplier details.
-The product service encompasses 1 models: **Vendor**
+The vendor service encompasses 1 models: **Vendor**
 
 
 Routes
