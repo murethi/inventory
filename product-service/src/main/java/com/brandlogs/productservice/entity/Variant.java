@@ -1,11 +1,11 @@
 package com.brandlogs.productservice.entity;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.Immutable;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -26,6 +26,7 @@ public class Variant {
     private long id;
     private String name;
     private String brand;
+    @Column(unique = true,updatable = false)
     private String sku;
 
     @Column(name = "created_at",nullable = false, updatable = false)

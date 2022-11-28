@@ -11,6 +11,18 @@ spring:
           predicates:
             - Path=/api/products/**
 
+        #Product service rout
+        - id: vendor-service
+          uri: lb://vendor-service
+          predicates:
+            - Path=/api/vendors/**
+
+        #Product service rout
+        - id: store-service
+          uri: lb://store-service
+          predicates:
+            - Path=/api/store/**
+
 
         #Discovery server route
         - id: discovery-server

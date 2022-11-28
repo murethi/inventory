@@ -1,8 +1,7 @@
 package com.brandlogs.productservice.controller;
 
-import com.brandlogs.productservice.dto.ProductRequest;
-import com.brandlogs.productservice.dto.ProductResponse;
 import com.brandlogs.productservice.dto.VariantRequest;
+import com.brandlogs.productservice.dto.VariantResponse;
 import com.brandlogs.productservice.service.VariantService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class VariantController {
      * @param variantRequest VariantRequest
      * @param productId pk of the product
      */
-    @GetMapping("/create/{productId}")
+    @PostMapping("/create/{productId}")
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody VariantRequest variantRequest,@PathVariable long productId){
         variantService.createVariant(variantRequest,productId);
@@ -36,6 +35,12 @@ public class VariantController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void update(@RequestBody VariantRequest variantRequest, @PathVariable long id){
         variantService.updateVariant(variantRequest,id);
+    }
+
+    @GetMapping("/view/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public VariantResponse view(@PathVariable long id){
+        return variantService.viewVariant(id);
     }
 
     @DeleteMapping("/delete/{id}")

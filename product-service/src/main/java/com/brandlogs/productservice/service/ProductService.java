@@ -1,76 +1,37 @@
 package com.brandlogs.productservice.service;
 
+import com.brandlogs.productservice.component.DtoToEntityMapper;
+import com.brandlogs.productservice.component.EntityToDtoMapper;
 import com.brandlogs.productservice.dto.ProductRequest;
 import com.brandlogs.productservice.dto.ProductResponse;
-import com.brandlogs.productservice.dto.VariantRequest;
-import com.brandlogs.productservice.dto.VariantResponse;
 import com.brandlogs.productservice.entity.Product;
-import com.brandlogs.productservice.entity.Variant;
 import com.brandlogs.productservice.exception.ModelNotFoundException;
 import com.brandlogs.productservice.repository.ProductRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final EntityToDtoMapper entityToDtoMapper;
+    private final DtoToEntityMapper dtoToEntityMapper;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, EntityToDtoMapper entityToDtoMapper, DtoToEntityMapper dtoToEntityMapper) {
         this.productRepository = productRepository;
+        this.entityToDtoMapper = entityToDtoMapper;
+        this.dtoToEntityMapper = dtoToEntityMapper;
     }
 
-    private static ProductResponse mapToProductResponse(Product product) {
-        List<Variant> variants =product.getVariants();
-        return ProductResponse.builder()
-                .id(product.getId())
-                .name(product.getName())
-                .category(product.getCategory())
-                .isDeleted(product.isDeleted())
-                .variants(variants.stream()
-                        .map(variant -> VariantResponse
-                                .builder()
-                                .id(variant.getId())
-                                .name(variant.getName())
-                                .sku(variant.getSku())
-                                .brand(variant.getBrand())
-                                .isDeleted(variant.isDeleted())
-                                .build()
-                        ).collect(Collectors.toList())
-                )
-                .build();
-    }
-
-
-    private static Product mapToProduct(ProductRequest productRequest){
-        List<VariantRequest> variantRequests =productRequest.variants();
-        return Product.builder()
-                .category(productRequest.category())
-                .name(productRequest.name())
-                .variants(variantRequests.stream().map(variantRequest ->
-                        Variant.builder()
-                        .name(variantRequest.name())
-                        .sku(variantRequest.sku())
-                        .brand(variantRequest.brand())
-                        .build()).collect(Collectors.toList()))
-                .build();
-    }
-
-
-
-
-    public Page<ProductResponse> findAllProducts() {
-        PageRequest pageRequest = PageRequest.of(0,50);
+    public Page<ProductResponse> findAllProducts(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page,size);
         return productRepository.findAll(pageRequest)
-                .map(ProductService::mapToProductResponse);
+                .map(entityToDtoMapper::mapToProductResponse);
     }
 
     public ProductResponse viewProduct(long id){
         return productRepository.findById(id)
-                .map(ProductService::mapToProductResponse)
+                .map(entityToDtoMapper::mapToProductResponse)
                 .orElseThrow(()->new ModelNotFoundException("Product with id %s not found".formatted(id)));
     }
 
@@ -80,8 +41,7 @@ public class ProductService {
      * @param productRequest an object of the product request dto
      */
     public void createProduct(ProductRequest productRequest) {
-        Product product = mapToProduct(productRequest);
-        System.out.println(product);
+        Product product = dtoToEntityMapper.mapToProduct(productRequest);
         productRepository.save(product);
     }
 

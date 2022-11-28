@@ -17,8 +17,8 @@ public class ProductController {
 
     @GetMapping("/")
     @ResponseStatus(HttpStatus.OK)
-    public Page<ProductResponse> index(){
-        return productService.findAllProducts();
+    public Page<ProductResponse> index(@RequestParam(value = "page",defaultValue = "0", required = false) int page, @RequestParam(value = "size",defaultValue = "20",required = false) int size){
+        return productService.findAllProducts(page,size);
     }
 
     @PostMapping("/create")

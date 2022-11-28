@@ -15,5 +15,9 @@
     </properties>
     <modules>
         <module>discovery-server</module>
+        <module>product-service</module>
+        <module>api-gateway</module>
+        <module>store-service</module>
+        <module>vendor-service</module>
     </modules>
 </project>
