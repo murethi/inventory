@@ -2,8 +2,8 @@
 
 ### How to run
 You can clone this repo,build an image and run it using docker.
-I have used the Jib maven plugin to build the docker image. Here is a linked to the
-Jib maven plugin</br>
+I have used the Jib maven plugin to build the docker image. Here is a link to the
+Jib maven plugin documentation</br>
 * https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin
 
 To build an image using Jib run the following command
@@ -12,7 +12,9 @@ To build an image using Jib run the following command
 mvn compile jib:dockerBuild
 ````
 
-in case you do not have jib plugin configured, you can build the app by running
+in case you do not have jib plugin configured, 
+you can build the app by running or are getting the error
+````No plugin found for prefix 'jib' in the current project and in the plugin````
 
 ````
 mvn compile com.google.cloud.tools:jib-maven-plugin:dockerBuild
@@ -22,7 +24,7 @@ This will build docker images for the 5 services on this app:
 * Discovery Server
 * Product Service
 * Store Service
-* Vender Service
+* Vendor Service
 
 * You can change the image name by editing within the root ````pom.xml```` file. <br>
 
