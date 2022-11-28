@@ -14,8 +14,11 @@ mvn compile jib:dockerBuild
 
 in case you do not have jib plugin configured, 
 you can build the app by running or are getting the error
-````No plugin found for prefix 'jib' in the current project and in the plugin````
-
+````
+No plugin found for prefix 'jib' in the current project and 
+in the plugin
+````
+You can build the app by running
 ````
 mvn compile com.google.cloud.tools:jib-maven-plugin:dockerBuild
 ````
