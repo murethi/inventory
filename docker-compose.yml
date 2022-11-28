@@ -1,0 +1,72 @@
+version: '3'
+
+services:
+  #mysql docker container for account service
+  murethi-codetest-db:
+    container_name: murethi-codetest-db
+    image: mysql:8.0
+    command: mysqld --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: inventory_application
+      MYSQL_USER: murethi
+      MYSQL_PASSWORD: codetest#2022
+      MYSQL_ALLOW_EMPTY_PASSWORD: "no"
+    ports:
+      - '3307:3306'
+
+
+  murethi-discovery-server:
+    container_name: murethi-discovery-server
+    image: discovery-server
+    ports:
+      - "8761:8761"
+
+  murethi-api-gateway:
+    container_name: murethi-api-gateway
+    image: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - murethi-discovery-server
+
+  murethi-product-service:
+    container_name: murethi-product-service
+    image: product-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://murethi-codetest-db:3306/inventory_application
+      - SPRING_DATASOURCE_USERNAME=murethi
+      - SPRING_DATASOURCE_PASSWORD=codetest#2022
+    depends_on:
+      - murethi-codetest-db
+      - murethi-discovery-server
+      - murethi-api-gateway
+
+  murethi-store-service:
+    container_name: murethi-store-service
+    image: store-service
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://murethi-codetest-db:3306/inventory_application
+      - SPRING_DATASOURCE_USERNAME=murethi
+      - SPRING_DATASOURCE_PASSWORD=codetest#2022
+    depends_on:
+      - murethi-codetest-db
+      - murethi-discovery-server
+      - murethi-api-gateway
+  murethi-vendor-service:
+    container_name: murethi-vendor-service
+    image: vendor-service
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://murethi-codetest-db:3306/inventory_application
+      - SPRING_DATASOURCE_USERNAME=murethi
+      - SPRING_DATASOURCE_PASSWORD=codetest#2022
+    depends_on:
+      - murethi-codetest-db
+      - murethi-discovery-server
+      - murethi-api-gateway

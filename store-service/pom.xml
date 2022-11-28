@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.brandlogs</groupId>
     <artifactId>store-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>latest</version>
     <name>store-service</name>
     <description>store-service</description>
     <properties>

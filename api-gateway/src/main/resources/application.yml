@@ -26,14 +26,14 @@ spring:
 
         #Discovery server route
         - id: discovery-server
-          uri: http://localhost:8761
+          uri: http://murethi-discovery-server:8761
           predicates:
             - Path=/eureka/web
           filters:
             - SetPath=/
         #Discovery server static files route
         - id: discovery-server-static
-          uri: http://localhost:8761
+          uri: http://murethi-discovery-server:8761
           predicates:
             ##line below serves static files from eureka server css,js,images using localhost:port/eureka
             - Path=/eureka/**
@@ -41,7 +41,7 @@ spring:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8761/eureka
+      defaultZone: http://murethi-discovery-server:8761/eureka
   instance:
     hostname: localhost
 #Eureka Routes
