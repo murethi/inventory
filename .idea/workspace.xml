@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a31381c-5c53-4faf-bfd9-5d4a18177be6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/741e546f-9950-4e5a-8745-ec15de070b0e.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/741e546f-9950-4e5a-8745-ec15de070b0e.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,7 @@
         <option value="Enum" />
         <option value="Record" />
         <option value="Class" />
+        <option value="AnnotationType" />
       </list>
     </option>
   </component>
@@ -152,7 +151,11 @@
       <workItem from="1669535761710" duration="42561000" />
       <workItem from="1669608047008" duration="21016000" />
       <workItem from="1669632546718" duration="721000" />
-      <workItem from="1669634184534" duration="311000" />
+      <workItem from="1669634184534" duration="3854000" />
+      <workItem from="1669706640160" duration="6087000" />
+      <workItem from="1669734405450" duration="660000" />
+      <workItem from="1669772712257" duration="5000" />
+      <workItem from="1669773011265" duration="953000" />
     </task>
     <servers />
   </component>

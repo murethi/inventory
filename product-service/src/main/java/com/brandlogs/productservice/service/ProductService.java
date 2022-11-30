@@ -47,18 +47,22 @@ public class ProductService {
 
     public void updateProduct(ProductRequest productRequest,long id) {
         productRepository.findById(id)
-                .ifPresent(product -> {
+                .ifPresentOrElse(product -> {
                     product.setName(productRequest.name());
                     product.setCategory(productRequest.category());
                     productRepository.save(product);
+                },()->{
+                    throw new ModelNotFoundException("Variant with id "+id+" not found");
                 });
     }
 
     public void deleteProduct(long id) {
         productRepository.findById(id)
-                .ifPresent(product -> {
+                .ifPresentOrElse(product -> {
                     product.setDeleted(true);
                     productRepository.save(product);
+                },()->{
+                    throw new ModelNotFoundException("Variant with id "+id+" not found");
                 });
     }
 }
