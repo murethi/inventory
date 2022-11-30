@@ -12,13 +12,13 @@ To build an image using Jib run the following command
 mvn compile jib:dockerBuild
 ````
 
-in case you do not have jib plugin configured, 
-you can build the app by running or are getting the error
+in case you get the error : 
 ````
 No plugin found for prefix 'jib' in the current project and 
 in the plugin
 ````
-You can build the app by running
+It is possible you do not have jib plugin configured, you can build the
+docker image by running
 ````
 mvn compile com.google.cloud.tools:jib-maven-plugin:dockerBuild
 ````
